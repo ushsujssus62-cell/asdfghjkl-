@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Namelytics</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    #name-input {
+      background-color: #0f172a !important;
+      color: #e2e8f0 !important;
+      caret-color: #38bdf8 !important;
+      border: none !important;
+      background-image: none !important;
+      box-shadow: inset 0 0 0 1000px #0f172a !important;
+    }
+    #name-input:focus,
+    #name-input:hover,
+    #name-input:active {
+      background-color: #0f172a !important;
+      box-shadow: inset 0 0 0 1000px #0f172a !important;
+      outline: none !important;
+    }
+    #name-input:-webkit-autofill,
+    #name-input:-webkit-autofill:hover,
+    #name-input:-webkit-autofill:focus,
+    #name-input:-webkit-autofill:active,
+    #name-input:-internal-autofill-selected {
+      -webkit-box-shadow: inset 0 0 0 1000px #0f172a !important;
+      box-shadow: inset 0 0 0 1000px #0f172a !important;
+      -webkit-text-fill-color: #e2e8f0 !important;
+      background-color: #0f172a !important;
+      background-image: none !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#050b16] text-slate-200">
+  <div class="relative overflow-hidden min-h-screen px-6 py-10 sm:px-10 lg:px-16">
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-[#050918] opacity-95"></div>
+    <div class="absolute left-1/2 top-12 h-80 w-80 -translate-x-1/2 rounded-full bg-sky-500/10 blur-3xl"></div>
+    <div class="relative mx-auto flex max-w-6xl flex-col gap-10">
+      <header class="mx-auto flex items-center justify-center text-slate-400 sm:text-base">
+        <div class="inline-flex items-center gap-4 rounded-full border border-slate-700/80 bg-slate-900/70 px-4 py-3 shadow-xl shadow-slate-950/20">
+          <div class="flex h-12 w-12 items-center justify-center rounded-3xl bg-gradient-to-br from-sky-400 via-sky-500 to-indigo-500 text-white shadow-lg shadow-sky-500/20">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </div>
+          <div class="text-left">
+            <p class="text-sm font-semibold text-slate-100">Namelytics</p>
+            <p class="text-xs uppercase tracking-[0.35em] text-slate-500">Global name explorer</p>
+          </div>
+        </div>
+      </header>
+
+      <main class="space-y-10">
+        <section class="space-y-6 text-center">
+            <h1 class="mx-auto max-w-5xl text-5xl font-semibold tracking-tight text-slate-100 sm:text-[5rem]">
+                Discover a Name&apos;s <span class="text-sky-300">Global Roots</span>
+            </h1>
+            <p class="mx-auto max-w-3xl text-base text-slate-400 sm:text-lg">
+            Type any name and see which countries it&apos;s most commonly found in, powered by real-world data.
+          </p>
+
+          <form id="name-form" class="mx-auto flex w-full max-w-5xl items-center gap-4 rounded-[2rem] border border-slate-700/70 bg-slate-950/70 p-3 shadow-[0_30px_80px_-40px_rgba(15,23,42,0.9)] backdrop-blur-xl">
+            <label for="name-input" class="sr-only">Name</label>
+            <div class="flex flex-1 items-center gap-3 rounded-full border border-slate-700/60 bg-slate-950/90 px-4 py-3 text-slate-200 shadow-inner shadow-slate-950/10">
+              <span class="flex h-11 w-11 items-center justify-center rounded-full bg-slate-900/80 text-slate-400 shadow-sm shadow-slate-950/20">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
+                  <circle cx="11" cy="11" r="7" />
+                  <line x1="16.65" y1="16.65" x2="21" y2="21" />
+                </svg>
+              </span>
+              <input id="name-input" type="text" autocomplete="off" placeholder="Enter a name" class="w-full appearance-none bg-slate-950 border-none text-lg text-slate-100 outline-none placeholder:text-slate-500 focus:bg-slate-950 focus:ring-0 focus:outline-none" />
+            </div>
+            <button id="search-button" type="submit" class="h-14 min-w-[170px] rounded-full bg-[#22a8ff] px-8 text-base font-semibold text-white transition hover:bg-sky-400">
+              Analyze
+            </button>
+          </form>
+
+          <p id="message-box" class="min-h-[1.5rem] text-sm text-rose-400"></p>
+        </section>
+
+        <section id="result-card" class="hidden space-y-6 rounded-3xl border border-slate-700/80 bg-slate-950/80 p-6 shadow-2xl shadow-slate-950/20 backdrop-blur-xl">
+          <div class="grid gap-4 md:grid-cols-3">
+            <div class="rounded-3xl bg-slate-900/90 p-6 shadow-inner shadow-slate-950/10">
+              <p class="text-sm uppercase tracking-[0.25em] text-slate-500">Name</p>
+              <p id="display-name" class="mt-4 text-3xl font-semibold text-slate-100"></p>
+            </div>
+            <div class="rounded-3xl bg-slate-900/90 p-6 shadow-inner shadow-slate-950/10">
+              <p class="text-sm uppercase tracking-[0.25em] text-slate-500">Top country</p>
+              <p id="top-country" class="mt-4 text-3xl font-semibold text-slate-100"></p>
+            </div>
+            <div class="rounded-3xl bg-slate-900/90 p-6 shadow-inner shadow-slate-950/10">
+              <p class="text-sm uppercase tracking-[0.25em] text-slate-500">Confidence</p>
+              <p id="confidence" class="mt-4 text-3xl font-semibold text-slate-100"></p>
+            </div>
+          </div>
+
+          <div class="rounded-3xl bg-slate-900/90 p-6 shadow-inner shadow-slate-950/10">
+            <div class="mb-6 flex items-center justify-between">
+              <div>
+                <p class="text-sm uppercase tracking-[0.25em] text-slate-500">Distribution overview</p>
+                <p id="countries-count" class="mt-2 text-sm text-slate-400"></p>
+              </div>
+            </div>
+            <div id="distribution-list" class="space-y-4"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="./main.js"></script>
+</body>
+</html>
